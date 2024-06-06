@@ -1,0 +1,16 @@
+<%- include('./partials/head') %>
+
+
+<h1><%= recipes[0].title %></h1>
+<p><%= recipes[0].preparation %></p>
+
+<ul class="ingredients">
+    <% ingredients.forEach (ingredient => { %>
+
+    <li> <%= ingredient.title %> </li>
+    
+    <% }) %>
+</ul>
+
+
+<%- include('./partials/foot') %>

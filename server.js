@@ -1,4 +1,4 @@
-console.log('Hier komt je server voor Sprint 12.')
+//console.log('Hier komt je server voor Sprint 12.')
 
 // opzetten van de webserver 
 
@@ -6,6 +6,8 @@ console.log('Hier komt je server voor Sprint 12.')
 import express from 'express'
 // Importeer de zelfgemaakte functie fetchJson uit de ./helpers map
 import fetchJson from './helpers/fetch-json.js'
+// Stel het basis endpoint in
+const apiUrl = 'https://fdnd-agency.directus.app/items/'
 // Maak een nieuwe express app aan
 const app = express()
 // Stel ejs in als template engine
@@ -18,12 +20,42 @@ app.use(express.static('public'))
 app.use(express.urlencoded({extended: true}))
 
 
-// maak een GET route voor de detailpagina
+// Maak een GET route voor de index (index.ejs)
+app.get('/', function(request, response) {
+    // Haal gegevens van alle endpoints uit de directus API op
+    Promise.all([
+        fetchJson(apiUrl + 'plus_box'),
+        fetchJson(apiUrl + 'plus_recipes')
+    ]).then(([mealsData, recipeData]) => {
+        // console.log(recipeData)
 
+        // Render index.ejs uit de views map en geef de opgehaalde data mee als variabele
+        response.render('index', {
+            box: mealsData.data,
+            recipes: recipeData.data
+        })
+    })
+})
 
+// Maak een GET route voor de detailpagina (recipe.ejs)
+app.get('/recipe/:id', function(request, response) {
+    // Haal gegevens van alle endpoints uit de directus API op
+    Promise.all([
+        fetchJson(apiUrl + 'plus_recipes'),
+        fetchJson(apiUrl + 'plus_ingredients')
+    ]).then(([recipeData, ingredientData]) => {
+        // console.log(recipeData)
+        // console.log(ingredientData)
 
-// maak een POST route voor de detailpagina
+        // Render recipe.ejs uit de views map en geef de opgehaalde data mee als variabele
+        response.render('recipe', {
+            recipes: recipeData.data,
+            ingredients: ingredientData.data
+        })
+    })
+})
 
+// maak een POST route voor de detailpagina (recipe.ejs)
 
 
 // start de webserver
