@@ -1,0 +1,61 @@
+
+@font-face {
+    font-family: GothamBold;
+    src: url(./fonts/GothamBold.otf)
+}
+
+@font-face {
+    font-family: GothamMedium;
+    src: url(./fonts/GothamMedium.otf)
+}
+
+@font-face {
+    font-family: GothamBook;
+    src: url(./fonts/GothamBook.otf)
+}
+
+/***** custom properties *****/
+
+:root {
+    --main-brand-color: #80bd1d;
+    --main-bg-color: #f3f9e9;
+
+    --border-radius-1: 1rem;
+}
+
+/***** general styling ****/
+
+/*  fonts  */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+h1, h2, h3 {
+    font-family: Gothambold;
+}
+
+h4, h5, h6, button {
+    font-family: GothamMedium;
+}
+
+p, a {
+    font-family: GothamBook;
+}
+
+h1 {
+    font-size: 32px;
+    line-height: 40px;
+}
+
+h2 {
+    font-size: 28px;
+    line-height: 36px;
+}
+
+p {
+   font-size: 18px;
+   line-height: 26px; 
+}
