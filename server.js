@@ -26,12 +26,12 @@ app.get('/', function(request, response) {
     Promise.all([
         fetchJson(apiUrl + 'plus_box'),
         fetchJson(apiUrl + 'plus_recipes')
-    ]).then(([mealsData, recipeData]) => {
+    ]).then(([boxData, recipeData]) => {
         // console.log(recipeData)
 
         // Render index.ejs uit de views map en geef de opgehaalde data mee als variabele
         response.render('index', {
-            box: mealsData.data,
+            box: boxData.data,
             recipes: recipeData.data
         })
     })
@@ -39,17 +39,18 @@ app.get('/', function(request, response) {
 
 // Maak een GET route voor de detailpagina (recipe.ejs)
 app.get('/recipe/:id', function(request, response) {
+    // const recipeId = request.params.id
     // Haal gegevens van alle endpoints uit de directus API op
     Promise.all([
-        fetchJson(apiUrl + 'plus_recipes'),
+        fetchJson(apiUrl + 'plus_recipes/' + request.params.id),
         fetchJson(apiUrl + 'plus_ingredients')
     ]).then(([recipeData, ingredientData]) => {
-        // console.log(recipeData)
+        console.log(recipeData)
         // console.log(ingredientData)
 
         // Render recipe.ejs uit de views map en geef de opgehaalde data mee als variabele
         response.render('recipe', {
-            recipes: recipeData.data,
+            recipe: recipeData.data,
             ingredients: ingredientData.data
         })
     })

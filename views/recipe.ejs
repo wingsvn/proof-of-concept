@@ -1,28 +1,56 @@
 <%- include('./partials/head') %>
 
-
-
 <header>
-    <img>
+    <img src="../logos/PLUSlogo.svg" width="" heigth="">
     <button>
-
+        <img src="../images/basket.png" width="" height="">
     </button>
 </header>
 
 <main>
     
+    <section class="recipe-information">
+        <img src="">
+        <h1> <%= recipe.title %> </h1>
+        <p> <%- recipe.preperation %> </p>
+
+        <article class="recommendation">
+            <h2>variatie tip</h2>
+            <p> Snijd de hamburgerbroodjes doormidden en rooster beide kanten tot ze knapperig en goudbruin zijn.</p>
+        </article>
+    </section>
+
+    <section class="recipe-groceries">
+        <h2>kies je producten</h2>
+
+        <% ingredients.forEach (ingredient => { %>
+        <ul class="ingredients">
+            <li>
+                <img src="">
+                <article class="ingredient-information">
+                    <h3> <%= ingredient.title %> </h3>
+                    <p> <%= ingredient.measure %> <%= ingredient.unit %> </p>
+                    <p> <%= ingredient.price %> </p>
+                </article>
+                <div class="counter">
+                    <button> - </button>
+                    <p> 1 </p>
+                    <button> + </button>
+                </div>
+            </li>
+            <% }) %>
+        </ul>
+        <section class="grocery-sumup">
+            <h2>totaal</h2>
+            <p>€ 0,00</p>
+            <form>
+                <button type="submit">voeg toe
+                </button>
+            </form>
+        </section>
+    </section>
+
 </main>
 
-
-<h1><%= recipes[0].title %></h1>
-<p><%= recipes[0].preparation %></p>
-
-<ul class="ingredients">
-    <% ingredients.forEach (ingredient => { %>
-
-    <li> <%= ingredient.title %> </li>
-    
-    <% }) %>
-</ul>
 
 <%- include('./partials/foot') %>
