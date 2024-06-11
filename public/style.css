@@ -17,15 +17,29 @@
 /***** custom properties *****/
 
 :root {
-    --main-brand-color: #80bd1d;
-    --main-bg-color: #f3f9e9;
+    --primary-color: #80bd1d;
+    --primary-color-light: #e2f0bf;
+    --primary-color-lighter: #f3f9e9;
+    --secondary-color:#658d24;
+    --secondary-color-dark: #007f38;
+    --secondary-color-darker: #126436;
 
-    --border-radius-1: 1rem;
+    --flag-color-green: #115013;
+    --flag-color-orange: #ffa500;
+    --flag-color-red: #dd350d;
+    --flag-color-blue: #0b427f;
+
+    --banner-color-generic: #f3f9e9;
+    --banner-color-green: #cadfd3;
+    --neutral-color: #ffffff;
+    --background-color-button: #027F38;
+
+    --text-color: #333333;
+    --text-color-light: #666666;
+    --text-color-lighter: #999999;
 }
 
 /***** general styling ****/
-
-/*  fonts  */
 
 * {
     margin: 0;
@@ -33,29 +47,236 @@
     box-sizing: border-box;
   }
 
+html {
+    height: 100vh;
+}
+
+body {
+    height: 100%;
+    font-family: GothamBook;
+    font-size: 16px;
+    color: var(--text-color)
+}
+
 h1, h2, h3 {
-    font-family: Gothambold;
+    font-family: GothamBold;
+    color: var(--text-color);
 }
 
 h4, h5, h6, button {
     font-family: GothamMedium;
 }
 
-p, a {
-    font-family: GothamBook;
-}
-
 h1 {
-    font-size: 32px;
-    line-height: 40px;
+    font-size: 24px;
+    line-height: 32px;
 }
 
-h2 {
-    font-size: 28px;
+h2, button {
+    font-size: 20px;
     line-height: 36px;
 }
 
-p {
-   font-size: 18px;
-   line-height: 26px; 
+h3 {
+    font-size: 16px;
+    line-height: 36px;
 }
+
+h4 {
+    font-size: 16px;
+}
+
+p {
+   font-size: 16px;
+   line-height: 24px; 
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    color: var(--text-color-button);
+}
+
+/* ------ specific styling ------- */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 1;
+    padding: 1rem;
+    background-color: var(--primary-color);
+
+    a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 5.5rem;
+        height: 2.5rem;
+        border-radius: 1.5rem;
+        background-color: var(--background-color-button);
+    }
+}
+
+main {
+    position: absolute;
+    top: 72px;
+    left: 0;
+    margin: 1rem;
+    background-color: var(--neutral-color);
+}
+
+.recipe-information  {
+    
+    img { 
+        width: 100%;
+        height: 15em;
+        object-fit: cover; /* meeschalen van de image */
+    }
+}
+
+.recipe-preparation {
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+
+.suggestion {
+    padding: 0.5em;
+    border-radius: 1em;
+    background-color: var(--banner-color-green);
+    
+}
+
+.grocery-list {
+    display: grid;
+    background-color: var(--primary-color-light);
+    border-radius: 1em 1em 0 0;
+    margin-top: 60rem;
+    padding: 1em;
+
+    ul {
+        display: grid;
+        list-style-type: ""; /* voor accessibility */
+        gap: 0.5em;
+
+        li {
+            display: grid;
+            grid-auto-columns: auto 1fr auto;
+            grid-template-areas:
+            "image title title"
+            "image measurement measurement"
+            "image price button"; 
+            margin: 0.5em;
+            padding: 0.5em;
+            border-radius: 1em;
+            background-color: var(--neutral-color);
+        
+            img {
+                grid-area: image;
+                align-self: center;
+                margin: 0.5em; 
+            }
+
+            h3 {
+                grid-area: title;
+            }
+
+            p.ingredient-weight {
+                grid-area: measurement;
+            }
+
+            p.ingredient-price {
+                grid-area: price;
+                margin-top: auto; /* prijs aan de onderkant neerzetten */
+            }
+
+            div {
+                grid-area: button;
+            }  
+        }
+    }     
+}
+
+.ingredient-counter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1em;
+
+    button {
+        width: 32px;
+        height: 32px;
+        text-align: center;
+        border: 0.05em solid var(--primary-color);
+        background-color: var(--neutral-color);
+        color: var(--primary-color);
+    }
+
+    button.counter-subtract {
+        border-radius: 0.9em 0.9em 0.2em 0.9em;
+    }
+
+    button.counter-add {
+        border-radius: 0.9em 0.9em 0.9em 0.2em;
+    }
+}
+
+.groceries-sumup {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+}
+
+form {
+
+    button {
+        width: 100%; /* in de breedte meeschalen */
+        height: 48px;
+        border-radius: 1.2em 1.2em 1.2em 0.2em;
+        background-color: var(--primary-color);
+        color: var(--neutral-color);
+    }
+}
+
+
+/***** media queries *****/
+
+
+/* als de breedte meer dan 32em wordt dan graag de li items herhalen, met als breedte: 15em  */
+@media (width > 32em) { 
+    ul.ingredients {
+        grid-template-columns:repeat(auto-fit, minmax(15em, 1fr));
+
+        li {
+            grid-template-columns: 1fr auto;
+            grid-template-areas:
+            "image image"
+            "title title"
+            "measurement measurement"
+            "price button";
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
