@@ -31,12 +31,13 @@
 
     --banner-color-generic: #f3f9e9;
     --banner-color-green: #cadfd3;
-    --neutral-color: #ffffff;
     --background-color-button: #027F38;
 
-    --text-color: #333333;
-    --text-color-light: #666666;
-    --text-color-lighter: #999999;
+    --neutral-color-white: #ffffff;
+    --neutral-color-dark: #333333;
+    --neutral-color-grey: #666666;
+    --neutral-color-grey-light: #999999;
+    --neutral-color-grey-lighter: #F9F7F5;
 }
 
 /***** general styling ****/
@@ -55,12 +56,12 @@ body {
     height: 100%;
     font-family: GothamBook;
     font-size: 16px;
-    color: var(--text-color)
+    color: var(--neutral-color-dark)
 }
 
 h1, h2, h3 {
     font-family: GothamBold;
-    color: var(--text-color);
+    color: var(--neutral-color-dark);
 }
 
 h4, h5, h6, button {
@@ -97,6 +98,14 @@ button {
     color: var(--text-color-button);
 }
 
+ul {
+    list-style-type: ""; /* voor accessibility */
+}
+
+li {
+    line-height: 24px;
+}
+
 /* ------ specific styling ------- */
 
 header {
@@ -127,25 +136,63 @@ main {
     top: 72px;
     left: 0;
     margin: 1rem;
-    background-color: var(--neutral-color);
+    background-color: var(--neutral-color-white);
 }
 
+/* titel gedeelte */
 .recipe-information  {
     
     img { 
         width: 100%;
         height: 15em;
-        object-fit: cover; /* meeschalen van de image */
+        object-fit: cover; /* meeschalen van de image met de breedte van het scherm */
     }
 }
 
-.recipe-preparation {
+.tabs {
     display: flex;
-    justify-content: space-evenly;
+    flex-wrap: wrap; /* flex items op de volgende regel zetten */
+    justify-content: center;
+    /* max-width: 400px; */
+    width: 100%;
 
+    input {
+        display: none; /* make the radio button invisible */
+    }
+
+    label {
+        flex: 50%; /* each label takes up 50% of the container width */
+        text-align: center;
+        padding: 10px 16px;
+        color: var(--neutral-color-grey-light);
+        border-bottom: 0.2em solid var(--neutral-color-grey-lighter);
+        cursor: pointer; 
+        /* width: 50%;
+        object-fit: cover; */
+    }
+ /* order property: control the order of flex items within a flex container */
+    .tabs-content {
+        order: 1; /* positioneer hiermee de tabs naast elkaar */
+        width: 100%;
+        /* line-height: 1.5; */
+        display: none; /* 1. hier mee verberg je de content */
+        margin: 1em;
+    }
+
+    /* wanneer de tab/radio button op een checked state staat geef me dan de volgende styling mee op de label */
+    input:checked + label {
+        color: var(--background-color-button);
+        border-bottom: 0.2em solid var(--background-color-button);
+     }
+ 
+     /* tab button op checked state dan ... op tabs-content */
+     input:checked + label + .tabs-content {
+         display: initial; /* default/block value: visible display */
+         /* 2. hier laat je de content weer zien */
+     }
 }
 
-
+/* variatie tip */
 .suggestion {
     padding: 0.5em;
     border-radius: 1em;
@@ -153,16 +200,22 @@ main {
     
 }
 
+/* bovenkant boodschappenlijst + grid */
 .grocery-list {
     display: grid;
     background-color: var(--primary-color-light);
     border-radius: 1em 1em 0 0;
-    margin-top: 60rem;
+    margin-top: 65em;
     padding: 1em;
+    /* z-index: 2; */
+
+    button {
+        background-color: var(--primary-color-light);
+        margin: 0.5em 0 0.5em 0;
+    }
 
     ul {
         display: grid;
-        list-style-type: ""; /* voor accessibility */
         gap: 0.5em;
 
         li {
@@ -175,7 +228,7 @@ main {
             margin: 0.5em;
             padding: 0.5em;
             border-radius: 1em;
-            background-color: var(--neutral-color);
+            background-color: var(--neutral-color-white);
         
             img {
                 grid-area: image;
@@ -214,7 +267,7 @@ main {
         height: 32px;
         text-align: center;
         border: 0.05em solid var(--primary-color);
-        background-color: var(--neutral-color);
+        background-color: var(--neutral-color-white);
         color: var(--primary-color);
     }
 
@@ -227,6 +280,7 @@ main {
     }
 }
 
+/* onderkant van boodschappenlijst */
 .groceries-sumup {
     display: flex;
     justify-content: space-between;
@@ -235,24 +289,25 @@ main {
 
 form {
 
-    button {
+    button.add-ingredients {
         width: 100%; /* in de breedte meeschalen */
         height: 48px;
         border-radius: 1.2em 1.2em 1.2em 0.2em;
         background-color: var(--primary-color);
-        color: var(--neutral-color);
+        color: var(--neutral-color-white);
     }
 }
 
 
 /***** media queries *****/
 
-
-/* als de breedte meer dan 32em wordt dan graag de li items herhalen, met als breedte: 15em  */
+/* @media voor CSS grid */
+/* als de breedte meer dan 32em wordt dan graag de li items herhalen, met als breedte min. 15em  */
 @media (width > 32em) { 
     ul.ingredients {
-        grid-template-columns:repeat(auto-fit, minmax(15em, 1fr));
-
+        grid-template-columns: repeat(auto-fit, minmax(224px, 1fr));
+        background-color: yellow;
+        
         li {
             grid-template-columns: 1fr auto;
             grid-template-areas:
@@ -260,22 +315,17 @@ form {
             "title title"
             "measurement measurement"
             "price button";
+            background-color: pink;
         }
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
+/* @media query voor tabs */
+@media (width > 800px) {
+    .tabs {
+        display: grid;
+    }
+}
 
 
 

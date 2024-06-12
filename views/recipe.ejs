@@ -13,19 +13,45 @@
         <h1> <%= recipe.title %> </h1>
         <div class="icon-container">
         </div>
-        <h2>bereiding</h2>
-        <p> <%- recipe.preperation %> </p>
     </section>
 
+    <!-- tabs met ingredienten en bereiding -->
+    <div class="tabs">
+        <input type="radio" id="ingredients" name="tab-recipe" checked="true" aria-label="klik voor de ingredienten" > <!--the default state: landt op ingredienten-->
+        <label for="ingredients">ingrediënten</label>
+        <div class="tabs-content">
+            <ul>
+                <li>1 courgette</li>
+                <li>2 rode uien</li>
+                <li>1 rode parpika</li>
+                <li>3 el olijfolie</li>
+                <li>4 boerentrots van PLUS angusburgers</li>
+                <li>4 PLUS hamburgerbroodjes</li>
+                <li>25 gram rucola slamelange</li>
+                <li>1 trostomaat</li>
+                <li>4 el groene pesto</li>
+                <li>1 grillschaal</li>
+            </ul>
+        </div> 
+
+        <input type="radio" id="preparation" name="tab-recipe" aria-label="klik voor de bereidingswijze" > <!--zelfde naam zorgt voor groeperen van de radiobuttons, zodat je alleen 1 van tabs kunt selecteren-->
+        <label for="preparation">bereiding</label> 
+        <div class="tabs-content">
+            <p> <%- recipe.preperation %> </p>
+        </div>
+    </div>
+
+    <!-- variatie tip -->
     <section class="suggestion">
         <h2>variatie tip</h2>
         <p> Snijd de hamburgerbroodjes doormidden en rooster beide kanten tot ze knapperig en goudbruin zijn.</p>
     </section>   
-    
-    <button aria-label="open om je producten te kiezen">kies je producten</button>
+    <!-- <button aria-label="open om je producten te kiezen">kies je producten</button> -->
 </main>
 
+<!-- lijst met producten -->
 <section class="grocery-list">
+    <button aria-label="open om je producten te kiezen">kies je producten</button>
     <!-- <h2>kies je producten</h2> -->
     <% ingredients.forEach(ingredient => { %>
     <ul class="ingredients">
@@ -47,7 +73,7 @@
         <p>€ 0,00</p>
     </section>
     <form>
-        <button class="" type="submit" aria-label="voeg producten toe aan winkelmandje">toevoegen aan winkelwagen</button>
+        <button class="add-ingredients" type="submit" aria-label="voeg producten toe aan winkelmandje">toevoegen aan winkelwagen</button>
     </form>
 </section>
 
