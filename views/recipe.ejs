@@ -53,8 +53,9 @@
 <section class="grocery-list">
     <button aria-label="open om je producten te kiezen">kies je producten</button>
     <!-- <h2>kies je producten</h2> -->
-    <% ingredients.forEach(ingredient => { %>
+
     <ul class="ingredients">
+        <% ingredients.forEach(ingredient => { %>
         <li>
             <img src="../images/paprika.webp" height="60" alt="ingredient">
             <h3> <%= ingredient.title %> </h3>
@@ -66,8 +67,9 @@
                 <button class="counter-add" type="button" aria-label="verwijder 1 ingrediënt">+</button>
             </div>
         </li>
+        <% }) %> 
     </ul>
-    <% }) %>
+
     <section class="groceries-sumup">
         <h2>totaal</h2>
         <p>€ 0,00</p>

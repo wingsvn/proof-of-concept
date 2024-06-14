@@ -53,6 +53,7 @@ html {
 }
 
 body {
+    width: 100vw;
     height: 100%;
     font-family: GothamBook;
     font-size: 16px;
@@ -132,6 +133,10 @@ header {
 }
 
 main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
     position: absolute;
     top: 72px;
     left: 0;
@@ -143,9 +148,11 @@ main {
 .recipe-information  {
     
     img { 
-        width: 100%;
+        width: 100%; 
         height: 15em;
+        margin-bottom: 1em;
         object-fit: cover; /* meeschalen van de image met de breedte van het scherm */
+        border-radius: 1em;
     }
 }
 
@@ -153,8 +160,8 @@ main {
     display: flex;
     flex-wrap: wrap; /* flex items op de volgende regel zetten */
     justify-content: center;
-    /* max-width: 400px; */
     width: 100%;
+    margin: 2em 0;
 
     input {
         display: none; /* make the radio button invisible */
@@ -167,8 +174,6 @@ main {
         color: var(--neutral-color-grey-light);
         border-bottom: 0.2em solid var(--neutral-color-grey-lighter);
         cursor: pointer; 
-        /* width: 50%;
-        object-fit: cover; */
     }
  /* order property: control the order of flex items within a flex container */
     .tabs-content {
@@ -194,29 +199,49 @@ main {
 
 /* variatie tip */
 .suggestion {
+    margin-bottom: 6em;
     padding: 0.5em;
     border-radius: 1em;
     background-color: var(--banner-color-green);
-    
+    opacity: 0;
+    transition: all 3s;
+}
+
+
+.suggestion.show {
+    opacity: 1;
+    filter: blur(0);
 }
 
 /* bovenkant boodschappenlijst + grid */
 .grocery-list {
-    display: grid;
+    position: fixed;
+    bottom: -29em; /* show only the button part */
+    left: 0;
+    width: 100%;
     background-color: var(--primary-color-light);
     border-radius: 1em 1em 0 0;
-    margin-top: 65em;
-    padding: 1em;
-    /* z-index: 2; */
+    padding: 0.5em;
+    z-index: 100;
+
+    transition: transform 0.3s ease-in; /* Voeg een soepele overgang toe voor animatie */
+    transform: translateY(0); /* Startpositie voor animatie */
 
     button {
-        background-color: var(--primary-color-light);
+        width: 100%;
         margin: 0.5em 0 0.5em 0;
+        background-color: var(--primary-color-light);
     }
+
+    /* h2 {
+        margin: 0.5em 1em;
+        text-align: center;
+    } */
 
     ul {
         display: grid;
-        gap: 0.5em;
+        height: 20em;
+        overflow-y: scroll;
 
         li {
             display: grid;
@@ -229,6 +254,7 @@ main {
             padding: 0.5em;
             border-radius: 1em;
             background-color: var(--neutral-color-white);
+            /* height: 153px; */
         
             img {
                 grid-area: image;
@@ -238,22 +264,31 @@ main {
 
             h3 {
                 grid-area: title;
+                line-height: 1.5;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             p.ingredient-weight {
                 grid-area: measurement;
+                color: var(--neutral-color-grey-light);
             }
 
             p.ingredient-price {
                 grid-area: price;
-                margin-top: auto; /* prijs aan de onderkant neerzetten */
+                margin: 1em 0;
             }
 
             div {
                 grid-area: button;
             }  
         }
-    }     
+    }       
+}
+
+.grocery-list-show {
+    transform: translateY(-29em); /* Slide-up effect om te laten zien */
 }
 
 .ingredient-counter {
@@ -288,7 +323,6 @@ main {
 }
 
 form {
-
     button.add-ingredients {
         width: 100%; /* in de breedte meeschalen */
         height: 48px;
@@ -298,34 +332,33 @@ form {
     }
 }
 
-
 /***** media queries *****/
 
+
 /* @media voor CSS grid */
-/* als de breedte meer dan 32em wordt dan graag de li items herhalen, met als breedte min. 15em  */
+/* als de breedte meer dan 32em wordt dan graag meer kolommen, met als breedte min. 15em  */
+
 @media (width > 32em) { 
     ul.ingredients {
         grid-template-columns: repeat(auto-fit, minmax(224px, 1fr));
-        background-color: yellow;
-        
+
         li {
-            grid-template-columns: 1fr auto;
+            grid-auto-columns: 1fr auto;
             grid-template-areas:
             "image image"
             "title title"
             "measurement measurement"
             "price button";
-            background-color: pink;
         }
     }
 }
 
 /* @media query voor tabs */
-@media (width > 800px) {
+/* @media (width > 780px) {
     .tabs {
         display: grid;
     }
-}
+} */
 
 
 
