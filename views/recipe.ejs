@@ -15,8 +15,6 @@
             <img src="https://fdnd-agency.directus.app/assets/<%= recipe.photo %>" height="200" alt="burger">
         </picture>
         <h1> <%= recipe.title %> </h1>
-        <div class="icon-container">
-        </div>
     </section>
 
     <!-- tabs met ingredienten en bereiding -->
@@ -45,18 +43,15 @@
         </div>
     </div>
 
-    <!-- variatie tip -->
     <section class="suggestion">
         <h2>variatie tip</h2>
         <p> Snijd de hamburgerbroodjes doormidden en rooster beide kanten tot ze knapperig en goudbruin zijn.</p>
     </section>   
-    <!-- <button aria-label="open om je producten te kiezen">kies je producten</button> -->
 </main>
 
 <!-- lijst met producten -->
 <section class="grocery-list">
     <button aria-label="open om je producten te kiezen">kies je producten</button>
-    <!-- <h2>kies je producten</h2> -->
     <form>
         <ul class="ingredients">
             <% ingredients.slice(7,17).forEach(ingredient => { %>
