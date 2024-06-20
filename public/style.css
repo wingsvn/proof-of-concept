@@ -55,18 +55,18 @@ html {
 body {
     width: 100vw;
     height: 100%;
-    font-family: GothamBook;
+    font-family: GothamBook, Arial, Helvetica, sans-serif;
     font-size: 16px;
     color: var(--neutral-color-dark)
 }
 
 h1, h2, h3 {
-    font-family: GothamBold;
+    font-family: GothamBold, Arial, Helvetica, sans-serif;
     color: var(--neutral-color-dark);
 }
 
 h4, h5, h6, button {
-    font-family: GothamMedium;
+    font-family: GothamMedium, Arial, Helvetica, sans-serif;
 }
 
 h1 {
@@ -144,43 +144,42 @@ main {
     background-color: var(--neutral-color-white);
 }
 
+
 /* titel gedeelte */
 .recipe-information  {
     
-    img { 
+    picture img { 
         width: 100%; 
-        height: 15em;
         margin-bottom: 1em;
-        object-fit: cover; /* meeschalen van de image met de breedte van het scherm */
+        object-fit: cover; 
         border-radius: 1em;
     }
 }
 
 .tabs {
     display: flex;
-    flex-wrap: wrap; /* flex items op de volgende regel zetten */
+    flex-wrap: wrap; 
     justify-content: center;
     width: 100%;
     margin: 2em 0;
 
     input {
-        display: none; /* make the radio button invisible */
+        display: none;
     }
 
     label {
-        flex: 50%; /* each label takes up 50% of the container width */
+        flex: 50%;
         text-align: center;
         padding: 10px 16px;
         color: var(--neutral-color-grey-light);
         border-bottom: 0.2em solid var(--neutral-color-grey-lighter);
         cursor: pointer; 
     }
- /* order property: control the order of flex items within a flex container */
+ 
     .tabs-content {
-        order: 1; /* positioneer hiermee de tabs naast elkaar */
+        order: 1;
         width: 100%;
-        /* line-height: 1.5; */
-        display: none; /* 1. hier mee verberg je de content */
+        display: none; 
         margin: 1em;
     }
 
@@ -192,8 +191,7 @@ main {
  
      /* tab button op checked state dan ... op tabs-content */
      input:checked + label + .tabs-content {
-         display: initial; /* default/block value: visible display */
-         /* 2. hier laat je de content weer zien */
+         display: initial; 
      }
 }
 
@@ -206,7 +204,6 @@ main {
     opacity: 0;
     transition: all 3s;
 }
-
 
 .suggestion.show {
     opacity: 1;
@@ -237,109 +234,109 @@ main {
         margin: 0.5em 1em;
         text-align: center;
     } */
+    form {
 
-    ul {
-        display: grid;
-        height: 20em;
-        overflow-y: scroll;
-
-        li {
+        ul {
             display: grid;
-            grid-auto-columns: auto 1fr auto;
-            grid-template-areas:
-            "image title title"
-            "image measurement measurement"
-            "image price button"; 
-            margin: 0.5em;
-            padding: 0.5em;
-            border-radius: 1em;
-            background-color: var(--neutral-color-white);
-            /* height: 153px; */
-        
-            img {
-                grid-area: image;
-                align-self: center;
-                margin: 0.5em; 
-            }
+            height: 20em;
+            overflow-y: scroll;
+    
+            li {
+                display: grid;
+                grid-auto-columns: auto 1fr auto;
+                grid-template-areas:
+                "image title title"
+                "image measurement measurement"
+                "image price button"; 
+                margin: 0.5em;
+                padding: 0.5em;
+                border-radius: 1em;
+                background-color: var(--neutral-color-white);
+                /* height: 153px; */
+            
+                picture {
+                    grid-area: image;
+                    align-self: center;
+                    margin: 0.5em; 
+                }
+    
+                h3 {
+                    grid-area: title;
+                    line-height: 1.5;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+    
+                p.ingredient-weight {
+                    grid-area: measurement;
+                    color: var(--neutral-color-grey-light);
+                }
 
-            h3 {
-                grid-area: title;
-                line-height: 1.5;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
+                .ingredient-weight .characteristics {
+                    margin-left: 1em;
+                }
+                
+    
+                p.ingredient-price {
+                    grid-area: price;
+                    margin: 1em 0;
+                }
+    
+                .ingredient-counter {
+                    grid-area: button;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    gap: 1em;
 
-            p.ingredient-weight {
-                grid-area: measurement;
-                color: var(--neutral-color-grey-light);
+                    button {
+                        width: 32px;
+                        height: 32px;
+                        text-align: center;
+                        border: 0.05em solid var(--primary-color);
+                        background-color: var(--neutral-color-white);
+                        color: var(--primary-color);
+                    }
+                
+                    button.counter-subtract {
+                        border-radius: 0.9em 0.9em 0.2em 0.9em;
+                    }
+                
+                    button.counter-add {
+                        border-radius: 0.9em 0.9em 0.9em 0.2em;
+                    }
+                }  
             }
-
-            p.ingredient-price {
-                grid-area: price;
-                margin: 1em 0;
-            }
-
-            div {
-                grid-area: button;
-            }  
         }
-    }       
+        
+        .groceries-sumup {
+            display: flex;
+            justify-content: space-between;
+            padding: 1em;
+        }
+
+        button.add-ingredients {
+            width: 100%; /* in de breedte meeschalen */
+            height: 48px;
+            border-radius: 1.2em 1.2em 1.2em 0.2em;
+            background-color: var(--primary-color);
+            color: var(--neutral-color-white);
+        }
+    }    
 }
 
 .grocery-list-show {
     transform: translateY(-29em); /* Slide-up effect om te laten zien */
 }
 
-.ingredient-counter {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 1em;
-
-    button {
-        width: 32px;
-        height: 32px;
-        text-align: center;
-        border: 0.05em solid var(--primary-color);
-        background-color: var(--neutral-color-white);
-        color: var(--primary-color);
-    }
-
-    button.counter-subtract {
-        border-radius: 0.9em 0.9em 0.2em 0.9em;
-    }
-
-    button.counter-add {
-        border-radius: 0.9em 0.9em 0.9em 0.2em;
-    }
-}
-
-/* onderkant van boodschappenlijst */
-.groceries-sumup {
-    display: flex;
-    justify-content: space-between;
-    padding: 1em;
-}
-
-form {
-    button.add-ingredients {
-        width: 100%; /* in de breedte meeschalen */
-        height: 48px;
-        border-radius: 1.2em 1.2em 1.2em 0.2em;
-        background-color: var(--primary-color);
-        color: var(--neutral-color-white);
-    }
-}
-
 /***** media queries *****/
-
 
 /* @media voor CSS grid */
 /* als de breedte meer dan 32em wordt dan graag meer kolommen, met als breedte min. 15em  */
 
 @media (width > 32em) { 
-    ul.ingredients {
+    form ul.ingredients {
         grid-template-columns: repeat(auto-fit, minmax(224px, 1fr));
 
         li {
@@ -349,6 +346,10 @@ form {
             "title title"
             "measurement measurement"
             "price button";
+
+            picture {
+                justify-self: center;
+            }
         }
     }
 }
@@ -356,7 +357,7 @@ form {
 /* @media query voor tabs */
 /* @media (width > 780px) {
     .tabs {
-        display: grid;
+        
     }
 } */
 

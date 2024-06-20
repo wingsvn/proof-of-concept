@@ -1,7 +1,6 @@
 
 // console.log('hello!');
 
-
 // kijken of een item in de viewport binnen komt
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -26,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     button.addEventListener('click', function() {
         groceryList.classList.toggle('grocery-list-show'); // Toggle class to show/hide grocery list
+
     });
 });
 
@@ -52,10 +52,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+// Dutch price format
+// ik selecteer alle elementen waarvan deze een prijs bevatten
+const price = document.querySelectorAll('.ingredient-price');
 
+//ik loop vervolgens door elk element en geef die een functie mee
+price.forEach(price => {
+    // functie: ophalen van de prijstekst en vervangen van de tekens hiervan
+    const amount = price.textContent.replace(/[^\d.-]/g, '').replace(',', '.');
 
-
-
+    // het bedrag formatteren naar Nederlands prijsformaat
+    price.textContent = new Intl.NumberFormat("nl-NL", { style: "currency", currency: "EUR" }).format(amount);
+});
 
 
 
